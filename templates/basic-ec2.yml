@@ -7,6 +7,10 @@ Resources:
           packages:
             yum:
               java-1.8.0-openjdk: [] # Install Java during provisioning
+          commands:
+            download_zk: # download the 
+              command: "wget https://www.apache.org/dyn/closer.lua/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz"
+              cwd: "/home/ec2-user"
     Properties:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
