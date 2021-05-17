@@ -35,3 +35,4 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 ### Useful References 
 1. https://medium.com/@pacuna/running-a-zookeeper-ensemble-on-aws-8025a66e0c1
+2. https://zookeeper.apache.org/doc/r3.7.0/zookeeperStarted.html
