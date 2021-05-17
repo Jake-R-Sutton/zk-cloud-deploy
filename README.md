@@ -14,7 +14,7 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 2. Run
 
-        $ ./deploy zookeeper
+        $ ./deploy 3
 
 
 ----------------------------------------------
