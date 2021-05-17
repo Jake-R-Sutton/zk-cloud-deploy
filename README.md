@@ -31,3 +31,8 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 3. Debug cluster connectivity
 4. Use a client like Kazoo to hit the remote cluster
 5. Debug client connectivity. 
+
+
+### Useful References 
+1. https://medium.com/@pacuna/running-a-zookeeper-ensemble-on-aws-8025a66e0c1
+2. https://zookeeper.apache.org/doc/r3.7.0/zookeeperStarted.html
