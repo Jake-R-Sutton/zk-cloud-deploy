@@ -1,18 +1,18 @@
 import os
 import sys
 
-# Goal is to run a command like the following for all of the nodes in our cluster
-# cat out/dynamic_conf.cfg | ssh -i my-key-pair.pem ec2-user@<IP_Address>  "cat - >> /usr/local/zookeeper/conf/zoo.cfg"
-def main(key_pair_name):
+def main(cluster_file_location, key_pair_name):
     nodes = []
-    with open("out/cluster_ips.txt") as f:
+    with open(cluster_file_location) as f:
         nodes = f.readlines()
-        for ip in nodes:
-            command = "cat out/dynamic_conf.cfg | ssh -i {} ec2-user@{}  \"cat - >> /usr/local/zookeeper/conf/zoo.cfg\"".format(key_pair_name.strip(), ip.strip())
+        for i, ip in enumerate(nodes):
+            command = "cat out/server{}.cfg.add | ssh -o StrictHostKeychecking=no -i {} ec2-user@{}  \"cat - >> /usr/local/zookeeper/conf/zoo.cfg\"".format(i+1, key_pair_name.strip(), ip.strip())
+            os.system(command)
+            command = "echo '{}' | ssh -o StrictHostKeychecking=no -i {} ec2-user@{} -T \"cat > /var/lib/zookeeper/myid\"".format(i+1, key_pair_name.strip(), ip.strip())
             os.system(command)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("missing argument: ssh keypair name")
+    if len(sys.argv) != 3:
+        print("Usage: python cfgen/zk_write_remote_config.py <cluster_ip_txt_loc> <key_pair_loc>")
         exit(1)
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

@@ -38,7 +38,7 @@ Resources:
               command: chmod 777 /usr/local/zookeeper /var/lib/zookeeper 
               cwd: "/home/ec2-user"
             8_update_zk_persmissions: 
-              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg "
+              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg /var/lib/zookeeper /var/lib/zookeeper/*"
               cwd: "/home/ec2-user"
 
     Properties:
@@ -100,7 +100,7 @@ Resources:
               command: chmod 777 /usr/local/zookeeper /var/lib/zookeeper 
               cwd: "/home/ec2-user"
             8_update_zk_persmissions: 
-              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg "
+              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg /var/lib/zookeeper /var/lib/zookeeper/*"
               cwd: "/home/ec2-user"
 
     Properties:
@@ -162,7 +162,7 @@ Resources:
               command: chmod 777 /usr/local/zookeeper /var/lib/zookeeper 
               cwd: "/home/ec2-user"
             8_update_zk_persmissions: 
-              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg "
+              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg /var/lib/zookeeper /var/lib/zookeeper/*"
               cwd: "/home/ec2-user"
 
     Properties:
@@ -189,9 +189,14 @@ Resources:
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
-      GroupDescription: Enable SSH access via port 22
+      GroupDescription: Everywhere + SSH access via port 22 separately
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: '22'
           ToPort: '22'
           CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp 
+          FromPort: '0'
+          ToPort: '65535'
+          CidrIp: 0.0.0.0/0
+        

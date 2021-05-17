@@ -26,11 +26,13 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 ----------------------------------------------
 ### Remaining Work 
-1. Debug cluster connectivity
-2. Use a client like Kazoo to hit the remote cluster
-3. Debug client connectivity. 
+1. Bind each server configuration to 0.0.0.0 dynamically
+2. Update Security Group to Allow all Inbound TCP Traffic
+3. Update the myid files correctly. 
+4. Do not add to known hosts.
+5. Use a client like Kazoo to hit the remote cluster
 
-
+----------------------------------------------
 ### Useful References 
 1. https://medium.com/@pacuna/running-a-zookeeper-ensemble-on-aws-8025a66e0c1
 2. https://zookeeper.apache.org/doc/r3.7.0/zookeeperStarted.html
