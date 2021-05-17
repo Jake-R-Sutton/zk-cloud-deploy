@@ -1,0 +1,58 @@
+  Ec2Instance@{NUMBER}:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              java-1.8.0-openjdk: [] # Install Java during provisioning
+          commands: # executed in lexicographical order
+            # download Zookeeper onto the AWS VM
+            1_download_zk: 
+              command: "wget https://apache.claz.org/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz"
+              cwd: "/home/ec2-user"
+            # extract the newly downloaded archive 
+            2_extract_zk: 
+              command: "tar -xzf apache-zookeeper-3.7.0-bin.tar.gz"
+              cwd: "/home/ec2-user"
+            # install zookeeper to the system
+            3_install_zk: 
+              command: "mv apache-zookeeper-3.7.0-bin /usr/local/zookeeper"
+              cwd: "/home/ec2-user"
+            # create a proper zookeeper data directory
+            4_create_data_dir: 
+              command: "mkdir /var/lib/zookeeper"
+              cwd: "/home/ec2-user"
+            # position the provided configuration
+            5_dummy_configuration: 
+              command: "cp /usr/local/zookeeper/conf/zoo_sample.cfg /usr/local/zookeeper/conf/zoo.cfg"
+              cwd: "/home/ec2-user"
+            # rewrite the configuration with the new data directory
+            6_update_data_directory: 
+              command: sed -i.bak 's/\/tmp\/zookeeper/\/var\/lib\/zookeeper/g' /usr/local/zookeeper/conf/zoo.cfg
+              cwd: "/home/ec2-user"
+            # update the permissions of the zookeeper files so ec2-user can access them
+            7_update_zk_persmissions: 
+              command: chmod 777 /usr/local/zookeeper /var/lib/zookeeper 
+              cwd: "/home/ec2-user"
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2Instance@{NUMBER} '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
