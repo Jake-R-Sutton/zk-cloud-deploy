@@ -26,9 +26,8 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 ----------------------------------------------
 ### Remaining Work 
-
-1. Update ZK Configuration with the above IP Addresses
+1. Update ZK Configuration with the Cluster IP Addresses
 2. Once the Cluster Configuration has been updated, start the instances
 3. Debug cluster connectivity
 4. Use a client like Kazoo to hit the remote cluster
-4. Debug client connectivity. 
+5. Debug client connectivity. 
