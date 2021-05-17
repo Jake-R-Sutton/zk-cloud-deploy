@@ -37,6 +37,10 @@ Resources:
             7_update_zk_persmissions: 
               command: chmod 777 /usr/local/zookeeper /var/lib/zookeeper 
               cwd: "/home/ec2-user"
+            8_update_zk_persmissions: 
+              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg "
+              cwd: "/home/ec2-user"
+
     Properties:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
@@ -95,6 +99,10 @@ Resources:
             7_update_zk_persmissions: 
               command: chmod 777 /usr/local/zookeeper /var/lib/zookeeper 
               cwd: "/home/ec2-user"
+            8_update_zk_persmissions: 
+              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg "
+              cwd: "/home/ec2-user"
+
     Properties:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
@@ -153,6 +161,10 @@ Resources:
             7_update_zk_persmissions: 
               command: chmod 777 /usr/local/zookeeper /var/lib/zookeeper 
               cwd: "/home/ec2-user"
+            8_update_zk_persmissions: 
+              command: "chown ec2-user /usr/local/zookeeper/conf/*.cfg "
+              cwd: "/home/ec2-user"
+
     Properties:
       SecurityGroups:
         - !Ref InstanceSecurityGroup

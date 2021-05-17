@@ -21,3 +21,8 @@ aws ec2 describe-instances \
 echo "Generating dynamic zoo.cfg..."
 python cfgen/zk_conf_gen.py > out/dynamic_conf.cfg 
 
+echo "Done. Wait for configuration to complete for all nodes... (~5 mins)"
+read  -n 1 -p "Input Selection:" mainmenuinput
+
+echo "Writing cluster IPs to the cluster nodes..."
+python cfgen/zk_write_remote_config.py my-key-pair.pem
