@@ -14,7 +14,7 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 2. Run
 
-        $ ./deploy 3
+        $ ./deploy.sh 3
 
 
 ----------------------------------------------
@@ -26,11 +26,7 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 ----------------------------------------------
 ### Remaining Work 
-1. Bind each server configuration to 0.0.0.0 dynamically
-2. Update Security Group to Allow all Inbound TCP Traffic
-3. Update the myid files correctly. 
-4. Do not add to known hosts.
-5. Use a client like Kazoo to hit the remote cluster
+1. Use a Kazoo Client to hit the remote cluster
 
 ----------------------------------------------
 ### Useful References 
