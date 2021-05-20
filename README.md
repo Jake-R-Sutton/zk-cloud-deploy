@@ -23,11 +23,6 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
         aws ec2 describe-instances \
             --query "Reservations[*].Instances[*].PublicIpAddress" \
             --output=text
-
-----------------------------------------------
-### Remaining Work 
-1. Use a Kazoo Client to hit the remote cluster
-
 ----------------------------------------------
 ### Useful References 
 1. https://medium.com/@pacuna/running-a-zookeeper-ensemble-on-aws-8025a66e0c1
