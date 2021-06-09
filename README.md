@@ -14,7 +14,7 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 2. Run
 
-        $ ./deploy 3
+        $ ./deploy.sh 3
 
 
 ----------------------------------------------
@@ -23,15 +23,6 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
         aws ec2 describe-instances \
             --query "Reservations[*].Instances[*].PublicIpAddress" \
             --output=text
-
-----------------------------------------------
-### Remaining Work 
-1. Bind each server configuration to 0.0.0.0 dynamically
-2. Update Security Group to Allow all Inbound TCP Traffic
-3. Update the myid files correctly. 
-4. Do not add to known hosts.
-5. Use a client like Kazoo to hit the remote cluster
-
 ----------------------------------------------
 ### Useful References 
 1. https://medium.com/@pacuna/running-a-zookeeper-ensemble-on-aws-8025a66e0c1
