@@ -54,6 +54,9 @@ Resources:
       KeyName: my-key-pair
       InstanceType: t2.micro
       ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceZookeeper0
       UserData: !Base64 
         'Fn::Join':
           - ''
@@ -101,6 +104,9 @@ Resources:
       KeyName: my-key-pair
       InstanceType: t2.micro
       ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceBroker0
       UserData: !Base64 
         'Fn::Join':
           - ''
@@ -147,6 +153,9 @@ Resources:
       KeyName: my-key-pair
       InstanceType: t2.micro
       ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceBroker1
       UserData: !Base64 
         'Fn::Join':
           - ''
@@ -193,6 +202,9 @@ Resources:
       KeyName: my-key-pair
       InstanceType: t2.micro
       ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceBroker2
       UserData: !Base64 
         'Fn::Join':
           - ''
@@ -236,6 +248,9 @@ Resources:
       KeyName: my-key-pair
       InstanceType: t2.micro
       ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceConsumer0
       UserData: !Base64 
         'Fn::Join':
           - ''
@@ -247,6 +262,190 @@ Resources:
             - '         --stack '
             - !Ref 'AWS::StackName'
             - '         --resource Ec2InstanceConsumer0 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  # ================================== Consumer 1 ==================================
+  Ec2InstanceConsumer1:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceConsumer1
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstanceConsumer1 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  # ================================== Consumer 2 ==================================
+  Ec2InstanceConsumer2:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceConsumer2
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstanceConsumer2 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  # ================================== Consumer 3 ==================================
+  Ec2InstanceConsumer3:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceConsumer3
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstanceConsumer3 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  # ================================== Consumer 4 ==================================
+  Ec2InstanceConsumer4:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstanceConsumer4
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstanceConsumer4 '
             # - '         --configsets InstallAndRun '
             - '         --region '
             - !Ref 'AWS::Region'
@@ -279,6 +478,9 @@ Resources:
       KeyName: my-key-pair
       InstanceType: t2.micro
       ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstancePublisher0
       UserData: !Base64 
         'Fn::Join':
           - ''
@@ -294,6 +496,193 @@ Resources:
             - '         --region '
             - !Ref 'AWS::Region'
             - |+
+
+  # ================================== Publisher 1 ==================================
+  Ec2InstancePublisher1:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstancePublisher1
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstancePublisher1 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  # ================================== Publisher 2 ==================================
+  Ec2InstancePublisher2:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstancePublisher2
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstancePublisher2 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  # ================================== Publisher 3 ==================================
+  Ec2InstancePublisher3:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstancePublisher3
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstancePublisher3 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+  # ================================== Publisher 4 ==================================
+  Ec2InstancePublisher4:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config: 
+          packages:
+            yum:
+              git: [] # Install git
+          commands: # executed in lexicographical order
+            # clone the repo for our project onto the machine
+            1_clone_the_pub_sub_repo: 
+              command: "git clone https://github.com/Andrew-Whitaker/pub-sub.git"
+              cwd: "/home/ec2-user"
+            2_install_kazoo: 
+              command: "pip3 install kazoo"
+              cwd: "/home/ec2-user"
+            3_checkout_correct_branch: 
+              command: "git checkout -b architecture origin/architecture"
+              cwd: "/home/ec2-user/pub-sub"
+            
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      KeyName: my-key-pair
+      InstanceType: t2.micro
+      ImageId: 'ami-0d5eff06f840b45e9' # Basic Amazon Linux without Java 
+      Tags:
+        - Key: Name
+          Value: Ec2InstancePublisher4
+      UserData: !Base64 
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource Ec2InstancePublisher4 '
+            # - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+
+
+
 
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
