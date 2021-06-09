@@ -24,7 +24,7 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 ### Multiplexed SSSH
 
-        csshx -i my-key-pair.pem ec2-user@<IP_Address> ec2-user@<IP_Address> ec2-user@<IP_Address>
+        csshx --ssh_args "-i my-key-pair.pem" ec2-user@52.207.237.244 ec2-user@34.239.124.237 ec2-user@3.82.247.135
 
 ### Finishing Zookeeper Configuration 
 
