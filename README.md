@@ -18,6 +18,31 @@ To leverage this repository to deploy clusters to AWS, follow these configuratio
 
 
 ----------------------------------------------
+### Deploying the Testing Cluster
+
+        aws cloudformation deploy --template basic_cluster.yml --stack-name pub-sub-cluster-testt
+
+### Multiplexed SSSH
+
+        csshx -i my-key-pair.pem ec2-user@<IP_Address> ec2-user@<IP_Address> ec2-user@<IP_Address>
+
+### Finishing Zookeeper Configuration 
+
+1. Update the Zookeeper configurations at `/usr/local/zookeeper/conf/zoo.cfg`
+   
+        server.1=<IP_Address if remote else 0.0.0.0>:2888:3888
+        server.2=<IP_Address if remote else 0.0.0.0>:2888:3888
+        
+2. Update the Zookeepers ID at `/var/lib/zookeeper/myid`
+
+3. Start Zookeeper:
+
+        sudo /usr/local/zookeeper/bin/zkServer.sh start
+        sudo /usr/local/zookeeper/bin/zkServer.sh status
+        ...
+        sudo /usr/local/zookeeper/bin/zkServer.sh stop
+
+----------------------------------------------
   Random useful command:
 
         aws ec2 describe-instances \

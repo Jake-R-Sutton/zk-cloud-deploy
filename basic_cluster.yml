@@ -88,7 +88,10 @@ Resources:
             2_install_kazoo: 
               command: "pip3 install kazoo"
               cwd: "/home/ec2-user"
-            3_checkout_correct_branch: 
+            3_install_requests: 
+              command: "pip3 install requests"
+              cwd: "/home/ec2-user"
+            4_checkout_correct_branch: 
               command: "git checkout -b architecture origin/architecture"
               cwd: "/home/ec2-user/pub-sub"
             
@@ -131,7 +134,10 @@ Resources:
             2_install_kazoo: 
               command: "pip3 install kazoo"
               cwd: "/home/ec2-user"
-            3_checkout_correct_branch: 
+            3_install_requests: 
+              command: "pip3 install requests"
+              cwd: "/home/ec2-user"
+            4_checkout_correct_branch: 
               command: "git checkout -b architecture origin/architecture"
               cwd: "/home/ec2-user/pub-sub"
             
@@ -174,7 +180,10 @@ Resources:
             2_install_kazoo: 
               command: "pip3 install kazoo"
               cwd: "/home/ec2-user"
-            3_checkout_correct_branch: 
+            3_install_requests: 
+              command: "pip3 install requests"
+              cwd: "/home/ec2-user"
+            4_checkout_correct_branch: 
               command: "git checkout -b architecture origin/architecture"
               cwd: "/home/ec2-user/pub-sub"
             
